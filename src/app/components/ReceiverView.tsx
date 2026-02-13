@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react';
 import Image from 'next/image';
-import { ShareData, ROMANTIC_QUOTES, Stroke, TextElement } from '../utils/encode';
+import { ShareData, ROMANTIC_QUOTES, Stroke } from '../utils/encode';
 import RandomDucks from './RandomDucks';
 import confetti from 'canvas-confetti';
 import Gallery from './Gallery';
 import { useRouter } from 'next/navigation';
 
 // Canvas-based preview component with textured stroke (same algorithm as DrawCanvas)
-const DrawingPreview = memo(function DrawingPreview({ strokes, texts = [] }: { strokes: Stroke[], texts?: TextElement[] }) {
+const DrawingPreview = memo(function DrawingPreview({ strokes }: { strokes: Stroke[] }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -104,22 +104,7 @@ const DrawingPreview = memo(function DrawingPreview({ strokes, texts = [] }: { s
                 drawTexturedStroke(stroke.path[i - 1], stroke.path[i]);
             }
         });
-
-        // Draw text elements
-        texts.forEach(textEl => {
-            ctx.save();
-            ctx.fillStyle = '#FF2D55';
-            ctx.font = '16px Arial';
-            ctx.textBaseline = 'top';
-            
-            // Apply same transformation as strokes
-            const transformedX = textEl.x * scale + offsetX;
-            const transformedY = textEl.y * scale + offsetY;
-            
-            ctx.fillText(textEl.text, transformedX, transformedY);
-            ctx.restore();
-        });
-    }, [strokes, texts]);
+    }, [strokes]);
 
     if (!strokes || strokes.length === 0) return null;
 
@@ -270,7 +255,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                                     backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)',
                                     backgroundSize: '20px 20px'
                                 }}></div>
-                                <DrawingPreview strokes={data.d} texts={data.t} />
+                                <DrawingPreview strokes={data.d} />
                             </div>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
@@ -416,7 +401,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                                     backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)',
                                     backgroundSize: '20px 20px'
                                 }}></div>
-                                <DrawingPreview strokes={data.d} texts={data.t} />
+                                <DrawingPreview strokes={data.d} />
                             </div>
 
                             <div className="mt-4 text-center relative z-10">

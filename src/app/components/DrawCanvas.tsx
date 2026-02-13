@@ -1,8 +1,9 @@
+
 'use client';
 
 import { useRef, useEffect, useState } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { Wand2, Type } from "lucide-react";
+import { Wand2 } from "lucide-react";
 import { TEMPLATES, Template } from "../utils/templates";
 
 const MAX_MOVES = 5;
@@ -13,29 +14,17 @@ const CURSOR_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 
 import { Stroke } from "../utils/encode";
 
-interface TextElement {
-    id: string;
-    text: string;
-    x: number;
-    y: number;
-}
-
 interface DrawCanvasProps {
     onClose: () => void;
     readOnly?: boolean;
     initialData?: Stroke[];
-    onShare?: (strokes: Stroke[], texts?: TextElement[]) => void;
+    onShare?: (strokes: Stroke[]) => void;
 }
 
 export default function DrawCanvas({ onClose, readOnly = false, initialData, onShare }: DrawCanvasProps) {
     const [moves, setMoves] = useState(0);
     const [strokes, setStrokes] = useState<Stroke[]>([]);
     const [showTemplates, setShowTemplates] = useState(false);
-    const [texts, setTexts] = useState<TextElement[]>([]);
-    const [showTextModal, setShowTextModal] = useState(false);
-    const [currentText, setCurrentText] = useState("");
-    const [draggingId, setDraggingId] = useState<string | null>(null);
-    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
     const currentPath = useRef<{ x: number, y: number }[]>([]);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -305,55 +294,7 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
             // Don't redraw heart - user wanted blank canvas after reset
             setMoves(0);
             setStrokes([]);
-            setTexts([]);
         }
-    };
-
-    const handleAddText = () => {
-        if (!currentText.trim()) return;
-        
-        const newText: TextElement = {
-            id: Date.now().toString(),
-            text: currentText,
-            x: 50,
-            y: 50
-        };
-        
-        setTexts(prev => [...prev, newText]);
-        setCurrentText("");
-        setShowTextModal(false);
-    };
-
-    const handleDeleteText = (id: string) => {
-        setTexts(prev => prev.filter(t => t.id !== id));
-    };
-
-    const handleMouseDownText = (e: React.MouseEvent, id: string) => {
-        e.stopPropagation();
-        setDraggingId(id);
-        const text = texts.find(t => t.id === id);
-        if (text) {
-            setDragOffset({
-                x: e.clientX - text.x,
-                y: e.clientY - text.y
-            });
-        }
-    };
-
-    const handleMouseMoveText = (e: React.MouseEvent) => {
-        if (!draggingId || !containerRef.current) return;
-        
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = Math.max(0, Math.min(e.clientX - rect.left - dragOffset.x, rect.width - 100));
-        const y = Math.max(0, Math.min(e.clientY - rect.top - dragOffset.y, rect.height - 50));
-        
-        setTexts(prev => prev.map(t => 
-            t.id === draggingId ? { ...t, x, y } : t
-        ));
-    };
-
-    const handleMouseUpText = () => {
-        setDraggingId(null);
     };
 
     const handleSave = () => {
@@ -532,29 +473,21 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                     </div>
                 )}
 
-                {/* Top Right Controls: Close & Template & Text */}
+                {/* Top Right Controls: Close & Template */}
                 {!readOnly && (
                     <div className="absolute top-4 right-4 z-10 flex items-center gap-3">
                         <button
                             type="button"
                             onClick={() => setShowTemplates(true)}
-                            aria-label="Elegir una plantilla"
+                            aria-label="Choose a template"
                             className="w-10 h-10 bg-white text-[#FF2D55] border-2 border-[#FF2D55]/20 rounded-full flex items-center justify-center text-lg font-bold hover:scale-105 transition-all shadow-sm focus:outline-none"
                         >
                             <Wand2 className="w-5 h-5" />
                         </button>
                         <button
                             type="button"
-                            onClick={() => setShowTextModal(true)}
-                            aria-label="Agregar texto"
-                            className="w-10 h-10 bg-white text-[#FF2D55] border-2 border-[#FF2D55]/20 rounded-full flex items-center justify-center text-lg font-bold hover:scale-105 transition-all shadow-sm focus:outline-none"
-                        >
-                            <Type className="w-5 h-5" />
-                        </button>
-                        <button
-                            type="button"
                             onClick={onClose}
-                            aria-label="Cerrar canvas de dibujo"
+                            aria-label="Close drawing canvas"
                             className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg font-bold hover:scale-105 transition-all shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#FF2D55]"
                         >
                             ✕
@@ -582,42 +515,6 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                         onTouchEnd={stopDrawing}
                         className="block w-full h-full touch-none relative z-0"
                     />
-
-                    {/* Text Elements */}
-                    {!readOnly && texts.map(text => (
-                        <div
-                            key={text.id}
-                            className="absolute z-20 cursor-move select-none"
-                            style={{
-                                left: `${text.x}px`,
-                                top: `${text.y}px`,
-                            }}
-                            onMouseMove={handleMouseMoveText}
-                            onMouseUp={handleMouseUpText}
-                        >
-                            <div className="relative bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border-2 border-[#FF2D55]/30 p-3 pr-8 max-w-xs">
-                                {/* Drag Handle (esquina superior izquierda) */}
-                                <div
-                                    className="absolute -top-2 -left-2 w-6 h-6 bg-[#FF2D55] rounded-full cursor-move flex items-center justify-center text-white text-xs font-bold shadow-md hover:scale-110 transition-transform"
-                                    onMouseDown={(e) => handleMouseDownText(e, text.id)}
-                                >
-                                    ⋮⋮
-                                </div>
-                                
-                                {/* Close Button (esquina superior derecha) */}
-                                <button
-                                    onClick={() => handleDeleteText(text.id)}
-                                    className="absolute -top-2 -right-2 w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold shadow-md hover:scale-110 transition-transform"
-                                >
-                                    ✕
-                                </button>
-                                
-                                <p className="text-sm text-gray-800 font-medium whitespace-pre-wrap break-words">
-                                    {text.text}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
 
                     {/* UI Overlay - Only show when NOT in readOnly mode */}
                     {!readOnly && (
@@ -648,7 +545,7 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
 
                                         <button
                                             type="button"
-                                            onClick={() => onShare?.(strokes, texts)}
+                                            onClick={() => onShare?.(strokes)}
                                             aria-label="Vista previa de tu tarjeta"
                                             disabled={moves === 0 && strokes.length === 0}
                                             className="w-full md:w-auto rounded-full px-8 py-3 md:px-6 md:py-2 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-bold text-lg md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black disabled:opacity-50 disabled:cursor-not-allowed shadow-lg md:shadow-none"
@@ -662,54 +559,6 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                     )}
                 </div>
             </m.div>
-
-            {/* Text Input Modal */}
-            {showTextModal && (
-                <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
-                    <div
-                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-                        onClick={() => setShowTextModal(false)}
-                    />
-                    <div
-                        className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-md relative z-10 shadow-2xl border-2 border-[#FF2D55]/20"
-                        onClick={e => e.stopPropagation()}
-                    >
-                        <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xl md:text-2xl font-black text-gray-900">
-                                Agregar Texto
-                            </h3>
-                            <button
-                                onClick={() => setShowTextModal(false)}
-                                className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-colors"
-                            >
-                                <span className="text-2xl">✕</span>
-                            </button>
-                        </div>
-
-                        <textarea
-                            value={currentText}
-                            onChange={(e) => setCurrentText(e.target.value.slice(0, 500))}
-                            placeholder="Escribe tu mensaje..."
-                            maxLength={500}
-                            className="w-full h-32 p-3 border-2 border-gray-200 rounded-xl focus:border-[#FF2D55] focus:outline-none resize-none font-medium text-gray-800"
-                        />
-                        
-                        <div className="flex items-center justify-between mt-2 mb-4">
-                            <span className="text-xs text-gray-400">
-                                {currentText.length}/500 caracteres
-                            </span>
-                        </div>
-
-                        <button
-                            onClick={handleAddText}
-                            disabled={!currentText.trim()}
-                            className="w-full bg-[#FF2D55] text-white font-bold py-3 rounded-full shadow-lg hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Agregar Texto
-                        </button>
-                    </div>
-                </div>
-            )}
         </LazyMotion>
     );
 }
