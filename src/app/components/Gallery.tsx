@@ -167,13 +167,13 @@ const GalleryCardPreview = memo(function GalleryCardPreview({ strokes }: { strok
 });
 
 const GALLERY_QUOTES = [
-    "Never above you. Never below you. Always beside you.",
-    "I love you very much, probably more than anybody could love another person.",
-    "I hope you don't mind that I put down in words how wonderful life is while you're in the world.",
-    "My heart to you is given, oh do give yours to me; We’ll lock them up together, and throw away the key.",
-    "I vow to fiercely love you in all your forms, now and forever.",
-    "Love is being stupid together.",
-    "In a world full of temporary things, you are my forever."
+    "Nunca por encima de ti. Nunca por debajo de ti. Siempre a tu lado.",
+    "Te amo mucho, probablemente más de lo que nadie podría amar a otra persona.",
+    "Espero que no te importe que ponga en palabras lo maravillosa que es la vida mientras estás en el mundo.",
+    "Mi corazón te lo doy, oh dame el tuyo; Los encerraremos juntos y tiraremos la llave.",
+    "Juro amarte ferozmente en todas tus formas, ahora y para siempre.",
+    "El amor es ser tontos juntos.",
+    "En un mundo lleno de cosas temporales, tú eres mi para siempre."
 ];
 
 interface GalleryProps {
@@ -234,9 +234,9 @@ export default function Gallery({ isOpen, onClose }: GalleryProps) {
             <div className="fixed inset-0 z-[85] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
                 <div className="bg-white rounded-3xl p-8 max-w-md text-center" onClick={e => e.stopPropagation()}>
                     <div className="text-4xl mb-4">⚙️</div>
-                    <h3 className="text-xl font-bold text-gray-700 mb-2">Gallery Not Configured</h3>
-                    <p className="text-gray-500 mb-6">Add your Supabase credentials to enable the gallery.</p>
-                    <button onClick={onClose} className="text-[#FF2D55] font-bold">Close</button>
+                    <h3 className="text-xl font-bold text-gray-700 mb-2">Galería No Configurada</h3>
+                    <p className="text-gray-500 mb-6">Agrega tus credenciales de Supabase para habilitar la galería.</p>
+                    <button onClick={onClose} className="text-[#FF2D55] font-bold">Cerrar</button>
                 </div>
             </div>
         );
@@ -269,15 +269,15 @@ export default function Gallery({ isOpen, onClose }: GalleryProps) {
                     <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
                         {/* Gallery Header */}
                         <div className="mb-8 mt-2 text-left">
-                            <h2 className="text-xl font-bold text-black mb-1">Community Gallery 💝</h2>
-                            <p className="text-sm text-gray-500 font-medium">See what others are creating for their Valentines!</p>
+                            <h2 className="text-xl font-bold text-black mb-1">Galería Comunitaria 💝</h2>
+                            <p className="text-sm text-gray-500 font-medium">¡Mira lo que otros están creando para sus San Valentines!</p>
                         </div>
 
                         {/* Loading State */}
                         {loading && (
                             <div className="w-full py-12 text-center">
                                 <div className="inline-block w-8 h-8 border-4 border-[#FF2D55] border-t-transparent rounded-full animate-spin"></div>
-                                <p className="mt-4 text-gray-500 font-medium">Loading Gallery...</p>
+                                <p className="mt-4 text-gray-500 font-medium">Cargando Galería...</p>
                             </div>
                         )}
 
@@ -292,7 +292,7 @@ export default function Gallery({ isOpen, onClose }: GalleryProps) {
                         {/* Empty State - Minimal */}
                         {!loading && !error && cards.length === 0 && (
                             <div className="w-full py-12 text-center">
-                                <p className="text-gray-400">No cards yet. Be the first!</p>
+                                <p className="text-gray-400">¡Aún no hay tarjetas. Sé el primero!</p>
                             </div>
                         )}
 
@@ -321,10 +321,10 @@ export default function Gallery({ isOpen, onClose }: GalleryProps) {
                                             </div>
 
                                             <p className="text-[10px] text-gray-400 uppercase tracking-wider font-bold mt-3 mb-1">
-                                                TO {card.receiver}
+                                                PARA {card.receiver}
                                             </p>
                                             <p className="text-sm text-gray-600 font-bold truncate" style={{ fontFamily: '"Chewy", cursive' }}>
-                                                Love, {card.sender}
+                                                Con amor, {card.sender}
                                             </p>
                                         </div>
                                     </m.div>
@@ -376,11 +376,11 @@ export default function Gallery({ isOpen, onClose }: GalleryProps) {
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
-                                        <span className="text-gray-500 text-sm">for</span>
+                                        <span className="text-gray-500 text-sm">para</span>
                                         <span className="text-4xl text-[#FF2D55]" style={{ fontFamily: '"Chewy", cursive' }}>{selectedCard.receiver},</span>
                                     </div>
                                     <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1 mt-1">
-                                        <span className="text-gray-500 text-sm ">from</span>
+                                        <span className="text-gray-500 text-sm ">de</span>
                                         <span className="text-2xl text-gray-600" style={{ fontFamily: '"Chewy", cursive' }}>{selectedCard.sender}</span>
                                     </div>
                                 </div>
