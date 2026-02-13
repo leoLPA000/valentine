@@ -118,20 +118,20 @@ const DrawingPreview = memo(function DrawingPreview({ strokes }: { strokes: Stro
 // Questions array defined outside component to prevent recreation on every render
 const QUESTIONS_TEMPLATE = [
     {
-        text: (name: string) => `${name || 'Love'}, do you enjoy talking to me?`,
-        options: ["Yes", "A little"]
+        text: (name: string) => `${name || 'Amor'}, ¿disfrutas hablar conmigo?`,
+        options: ["Sí", "Un poco"]
     },
     {
-        text: () => "Do my messages make you smile sometimes?",
-        options: ["Yes", "Sometimes"]
+        text: () => "¿Mis mensajes a veces te hacen sonreír?",
+        options: ["Sí", "A veces"]
     },
     {
-        text: () => "Do you feel like I understand you a little?",
-        options: ["Yes", "I think so"]
+        text: () => "¿Sientes que te entiendo un poco?",
+        options: ["Sí", "Creo que sí"]
     },
     {
-        text: () => "Would you be okay if I kept trying to make you smile?",
-        options: ["Please do ❤️", "Let's just be friends"]
+        text: () => "¿Estarías de acuerdo en que siga intentando hacerte sonreír?",
+        options: ["Por favor hazlo ❤️", "Seamos solo amigos"]
     }
 ];
 
@@ -199,7 +199,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                         onClick={() => window.location.href = '/'}
                         className="rounded-full px-5 md:px-6 py-1 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-medium text-xs md:text-sm whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
                     >
-                        Try it
+                        Probar
                     </button>
                 </div>
 
@@ -209,14 +209,14 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                         onClick={() => setIsGalleryOpen(true)}
                         className="rounded-full px-5 md:px-6 py-1 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-medium text-xs md:text-sm whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
                     >
-                        Gallery
+                        Galería
                     </button>
                     {step === 'PROPOSAL' && (
                         <button
                             onClick={() => setShowCardModal(true)}
                             className="rounded-full px-5 md:px-6 py-1 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-medium text-xs md:text-sm whitespace-nowrap min-w-[120px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
                         >
-                            Special Card
+                            Tarjeta Especial
                         </button>
                     )}
                 </div>
@@ -244,9 +244,9 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                         {/* Card Content */}
                         <div className="text-center relative z-10 pt-4">
                             <div className="flex flex-col items-center gap-1 mb-4">
-                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold">To my favorite</span>
+                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold">Para mi favorito/a</span>
                                 <h3 className="text-3xl text-gray-800" style={{ fontFamily: '"Chewy", cursive', transform: 'rotate(-2deg)' }}>
-                                    {data.r || 'You'}
+                                    {data.r || 'Tú'}
                                 </h3>
                             </div>
 
@@ -259,7 +259,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                             </div>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
-                                    <span className="text-gray-500 text-sm">from</span>
+                                    <span className="text-gray-500 text-sm">de</span>
                                     <span className="text-2xl text-gray-600" style={{ fontFamily: '"Chewy", cursive' }}>{data.s}</span>
                                 </div>
                                 <p className="text-[#FF2D55] text-xs font-medium italic mt-3 max-w-[280px] mx-auto leading-relaxed">
@@ -281,12 +281,12 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                             WebkitTextStroke: '1.5px black'
                         }}
                     >
-                        A Heart <br /> Just For You !
+                        ¡Un Corazón <br /> Solo Para Ti!
                     </h1>
                     <div className=" animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
 
                         <p className="text-gray-800 text-sm md:text-base font-medium -mt-1">
-                            (made this especially for you)
+                            (hecho especialmente para ti)
                         </p>
                     </div>
 
@@ -304,15 +304,15 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
 
                         <div className="space-y-3 mb-2">
                             <div className="flex flex-col items-center gap-1">
-                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold opacity-80">To my favorite</span>
+                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold opacity-80">Para mi favorito/a</span>
                                 <h2 className="text-3xl text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-chewy)', transform: 'rotate(-1deg)' }}>
-                                    {data.r || 'You'} !
+                                    {data.r || 'Tú'} !
                                 </h2>
                             </div>
 
                             <div className="bg-white/60 p-4 rounded-xl border border-white/50 shadow-sm backdrop-blur-sm">
                                 <p className="text-gray-600 text-sm font-medium leading-relaxed">
-                                    I have built a tiny universe just to ask you something…
+                                    He construido un pequeño universo solo para preguntarte algo…
                                 </p>
                             </div>
                         </div>
@@ -321,7 +321,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                             onClick={() => setStep('CHECKLIST')}
                             className="w-full bg-[#FF2D55] text-white px-8 py-3.5 rounded-full font-bold text-lg hover:scale-[1.02] transition-all shadow-lg shadow-pink-200 relative z-10 active:scale-95 border-b-4 border-black/20"
                         >
-                            Open 🙈
+                            Abrir 🙈
                         </button>
                     </div>
                 </div>
@@ -341,7 +341,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                         </div>
 
                         <div className="mb-8">
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold mb-4 block">Question {currentQuestionIndex + 1} of {questions.length}</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold mb-4 block">Pregunta {currentQuestionIndex + 1} de {questions.length}</span>
                             <h2 className="text-3xl text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-chewy)' }}>
                                 {questions[currentQuestionIndex].text}
                             </h2>
@@ -406,7 +406,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
 
                             <div className="mt-4 text-center relative z-10">
                                 <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
-                                    <span className="text-gray-500 text-sm">from</span>
+                                    <span className="text-gray-500 text-sm">de</span>
                                     <span className="text-2xl text-gray-600" style={{ fontFamily: '"Chewy", cursive' }}>{data.s}</span>
                                 </div>
                                 <p className="text-[#FF2D55] text-xs font-medium italic mt-3 max-w-[280px] mx-auto leading-relaxed">
@@ -427,7 +427,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                                 onClick={() => setProposalStatus('idle')}
                                 className="text-gray-700 underline text-lg transition-colors font-medium tracking-wide"
                             >
-                                Wait... I didn't mean it!
+                                Espera... ¡No lo decía en serio!
                             </button>
                         </div>
                     </div>
@@ -444,7 +444,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                                     WebkitTextStroke: '2px black'
                                 }}
                             >
-                                Will you be my <br /> Valentine ?
+                                ¿Quieres ser mi <br /> San Valentín ?
                             </h1>
 
                             {/* Yes/No Buttons */}
@@ -453,7 +453,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                                     onClick={handleYesClick}
                                     className="rounded-3xl px-12 py-4 border-2 border-black border-b-[6px] cursor-pointer bg-[#2ecc71] hover:brightness-110 hover:-translate-y-1 transition-all active:border-b-2 active:translate-y-1 text-white font-black text-3xl min-w-[180px] focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-[#2ecc71] rotate-2"
                                 >
-                                    YES!
+                                    ¡SÍ!
                                 </button>
                                 <button
                                     onClick={handleNoClick}

@@ -414,7 +414,7 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                                 <div className="p-2 bg-pink-100 rounded-lg">
                                     <Wand2 className="w-5 h-5 md:w-6 md:h-6 text-[#FF2D55]" />
                                 </div>
-                                Magic Templates
+                                Plantillas Mágicas
                             </h3>
                             <button
                                 onClick={() => setShowTemplates(false)}
@@ -441,7 +441,7 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
 
                         <div className="mt-8 flex justify-center">
                             <p className="text-xs md:text-sm text-gray-400 font-medium">
-                                Selection will clear your current canvas
+                                La selección borrará tu canvas actual
                             </p>
                         </div>
                     </div>
@@ -468,7 +468,7 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                 {/* Moves Counter - Top Left (hide in readOnly) */}
                 {!readOnly && (
                     <div className="absolute top-4 left-6 z-10 text-sm font-bold font-mono text-gray-400 tracking-wider pointer-events-none">
-                        {moves}/5 MOVES
+                        {moves}/5 MOVIMIENTOS
                     </div>
                 )}
 
@@ -521,11 +521,11 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                             <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between gap-3 md:gap-4 h-full md:h-auto pb-safe">
                                 {/* Left Side: Text */}
                                 <div className="flex flex-col gap-0.5 pointer-events-auto mt-auto md:mt-0">
-                                    <h2 className="text-lg md:text-xl font-bold text-black mb-1">Draw something just for them,</h2>
+                                    <h2 className="text-lg md:text-xl font-bold text-black mb-1">Dibuja algo especial para ellos,</h2>
                                     <div className="flex flex-col md:flex-row md:items-end gap-1 md:gap-6">
                                         <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
-                                            We've started with a heart, now you draw something in 5 moves <br className="hidden md:block" /> which will turn into a
-                                            beautiful card for your Valentine make your loved one feel special.
+                                            Hemos comenzado con un corazón, ahora dibuja algo en 5 movimientos <br className="hidden md:block" /> que se convertirá en una
+                                            hermosa tarjeta para tu San Valentín y hará sentir especial a tu ser querido.
                                         </p>
                                     </div>
                                 </div>
@@ -536,20 +536,20 @@ export default function DrawCanvas({ onClose, readOnly = false, initialData, onS
                                         <button
                                             type="button"
                                             onClick={handleReset}
-                                            aria-label="Reset canvas to initial state"
+                                            aria-label="Reiniciar canvas al estado inicial"
                                             className="text-sm font-medium text-gray-500 underline underline-offset-4 hover:text-black transition-colors whitespace-nowrap focus:outline-none focus-visible:text-black py-2"
                                         >
-                                            Reset Canvas
+                                            Reiniciar Canvas
                                         </button>
 
                                         <button
                                             type="button"
                                             onClick={() => onShare?.(strokes)}
-                                            aria-label="Preview your card"
+                                            aria-label="Vista previa de tu tarjeta"
                                             disabled={moves === 0 && strokes.length === 0}
                                             className="w-full md:w-auto rounded-full px-8 py-3 md:px-6 md:py-2 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-bold text-lg md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black disabled:opacity-50 disabled:cursor-not-allowed shadow-lg md:shadow-none"
                                         >
-                                            Preview Card
+                                            Vista Previa
                                         </button>
                                     </div>
                                 </div>

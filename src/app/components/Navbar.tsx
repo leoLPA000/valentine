@@ -16,19 +16,19 @@ export default function Navbar({ onDrawClick, onGalleryClick, isDrawOpen }: Navb
                 <button
                     type="button"
                     onClick={onDrawClick}
-                    aria-label={isDrawOpen ? "Close drawing canvas" : "Open drawing canvas"}
+                    aria-label={isDrawOpen ? "Cerrar canvas de dibujo" : "Abrir canvas de dibujo"}
                     aria-pressed={isDrawOpen}
                     className="rounded-full px-6 py-1 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-medium w-[90px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
                 >
-                    Draw
+                    Dibujar
                 </button>
                 <button
                     type="button"
                     onClick={onGalleryClick}
-                    aria-label="View community gallery"
+                    aria-label="Ver galería comunitaria"
                     className="rounded-full px-6 py-1 border border-b-[3px] border-black cursor-pointer bg-[#FF2D55] hover:brightness-110 transition-all active:border-b text-white font-medium w-[90px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
                 >
-                    Gallery
+                    Galería
                 </button>
             </div>
         </nav>

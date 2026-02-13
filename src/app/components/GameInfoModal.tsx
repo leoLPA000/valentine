@@ -24,28 +24,28 @@ export default function GameInfoModal({ onClose }: GameInfoModalProps) {
                     ✕
                 </button>
 
-                <h2 className="text-2xl font-bold text-[#FF2D55] mb-6 text-center uppercase tracking-widest">How to Play</h2>
+                <h2 className="text-2xl font-bold text-[#FF2D55] mb-6 text-center uppercase tracking-widest">Cómo Jugar</h2>
 
                 <div className="space-y-4 text-gray-700 font-medium">
                     <div className="flex gap-3 items-start">
                         <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">1</span>
-                        <p>Enter your Valentine's name.</p>
+                        <p>Ingresa el nombre de tu San Valentín.</p>
                     </div>
                     <div className="flex gap-3 items-start">
                         <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">2</span>
-                        <p>Draw sometheing special for them using only <strong>5 strokes</strong>.</p>
+                        <p>Dibuja algo especial para ellos usando solo <strong>5 trazos</strong>.</p>
                     </div>
                     <div className="flex gap-3 items-start">
                         <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">3</span>
-                        <p>Share the magic link with your special one.</p>
+                        <p>Comparte el enlace mágico con tu persona especial.</p>
                     </div>
                     <div className="flex gap-3 items-start">
                         <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">4</span>
-                        <p>They will answer some question, and view surprise drawing card, and respond!</p>
+                        <p>Ellos responderán algunas preguntas, verán la tarjeta sorpresa y responderán.</p>
                     </div>
                     <div className="flex gap-3 items-start">
-                        <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">4</span>
-                        <p>Cross your fingers and wait 🤞</p>
+                        <span className="bg-[#FF2D55] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">5</span>
+                        <p>¡Cruza los dedos y espera! 🤞</p>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@ export default function GameInfoModal({ onClose }: GameInfoModalProps) {
                         onClick={onClose}
                         className="text-gray-500 hover:text-[#FF2D55] text-sm underline underline-offset-4 transition-colors"
                     >
-                        Got it, let's play!
+                        ¡Entendido, a jugar!
                     </button>
                 </div>
             </div>

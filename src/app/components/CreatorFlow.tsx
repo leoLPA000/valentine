@@ -254,25 +254,25 @@ export default function CreatorFlow() {
                             WebkitTextStroke: '1.5px black'
                         }}
                     >
-                        Will you be my <br /> Valentine ?
+                        ¿Quieres ser mi <br /> San Valentín ?
                     </h1>
 
                     <div className="mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
 
                         <p className="text-gray-800 text-sm md:text-base font-medium -mt-1">
-                            ( It takes 2 minutes. They'll remember it forever)
+                            ( Toma 2 minutos. Lo recordarán para siempre)
                         </p>
                     </div>
 
                     <div className="w-full max-w-sm bg-white/40 backdrop-blur-md p-6 rounded-3xl border-2 border-white/50 shadow-xl animate-in fade-in zoom-in duration-700 delay-200 mt-12 md:mt-4">
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-left text-[#FF2D55] font-bold mb-1 ml-1 text-sm uppercase tracking-wider">Who is this for?</label>
+                                <label className="block text-left text-[#FF2D55] font-bold mb-1 ml-1 text-sm uppercase tracking-wider">¿Para quién es?</label>
                                 <input
                                     type="text"
                                     value={receiverName}
                                     onChange={(e) => setReceiverName(e.target.value)}
-                                    placeholder="Their Name"
+                                    placeholder="Su Nombre"
                                     className="w-full border-2 border-white/50 bg-white/60 rounded-xl p-3 focus:border-[#FF2D55] focus:outline-none focus:ring-2 focus:ring-[#FF2D55]/20 font-bold text-lg text-gray-800 placeholder:text-gray-400"
                                 />
                             </div>
@@ -283,7 +283,7 @@ export default function CreatorFlow() {
                             disabled={!receiverName.trim()}
                             className="w-full bg-[#FF2D55] text-white font-bold py-3 rounded-full text-lg shadow-lg hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6 transform hover:scale-[1.02]"
                         >
-                            Create Valentine
+                            Crear Tarjeta
                         </button>
                     </div>
 
@@ -292,7 +292,7 @@ export default function CreatorFlow() {
                         onClick={() => setShowInfo(true)}
                         className="fixed bottom-1 md:bottom-0.5 left-1/2 -translate-x-1/2 text-black font-medium text-sm underline underline-offset-4 transition-colors z-20"
                     >
-                        How it works
+                        Cómo funciona
                     </button>
                 </div>
             )}
@@ -328,7 +328,7 @@ export default function CreatorFlow() {
                                 </button>
                             </div>
 
-                            <h3 className="text-sm font-bold mb-6 text-[#FF2D55] text-center uppercase tracking-widest drop-shadow-sm">Card Preview</h3>
+                            <h3 className="text-sm font-bold mb-6 text-[#FF2D55] text-center uppercase tracking-widest drop-shadow-sm">Vista Previa</h3>
 
                             <div className="bg-white rounded-xl p-5 shadow-sm mb-4 text-center border border-gray-100 transform rotate-1 relative overflow-hidden ring-4 ring-pink-50/50">
                                 {/* Decorations */}
@@ -353,16 +353,16 @@ export default function CreatorFlow() {
 
                                 <div className="flex flex-col items-center relative z-20">
                                     <div className="flex flex-wrap justify-center items-baseline gap-x-2 gap-y-1">
-                                        <span className="text-gray-500 text-xs">for</span>
+                                        <span className="text-gray-500 text-xs">para</span>
                                         <span className="text-3xl text-[#FF2D55]" style={{ fontFamily: '"Chewy", cursive' }}>{receiverName},</span>
                                     </div>
                                     <div className="flex flex-wrap justify-center items-baseline gap-x-2 gap-y-1 mt-0">
-                                        <span className="text-gray-500 text-xs ">from</span>
+                                        <span className="text-gray-500 text-xs ">de</span>
                                         <input
                                             type="text"
                                             value={senderName}
                                             onChange={(e) => setSenderName(e.target.value)}
-                                            placeholder="Your Name"
+                                            placeholder="Tu Nombre"
                                             className="border-b-2 border-gray-300 focus:border-[#FF2D55] outline-none px-2 py-0 w-36 text-xl text-gray-600 placeholder:text-gray-300 bg-transparent text-center"
                                             style={{ fontFamily: '"Chewy", cursive' }}
                                         />
@@ -378,10 +378,10 @@ export default function CreatorFlow() {
                                 {saving ? (
                                     <>
                                         <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                                        Generating...
+                                        Generando...
                                     </>
                                 ) : (
-                                    'Create Link'
+                                    'Crear Enlace'
                                 )}
                             </button>
                         </div>
@@ -401,10 +401,10 @@ export default function CreatorFlow() {
                             <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl border-1 border-green-200 p-2">
                                 <Image src="/heart.webp" alt="will you be my valentine" width={48} height={48} className="w-full h-full object-contain" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-3 text-gray-900">Card Ready!</h3>
+                            <h3 className="text-2xl font-bold mb-3 text-gray-900">¡Tarjeta Lista!</h3>
                             <div className="mb-8">
-                                <p className="text-gray-700 font-medium">Special delivery for <span className="text-[#FF2D55] font-bold">{receiverName}</span></p>
-                                <p className="text-gray-500 font-medium">Send it now and wait for the magic!</p>
+                                <p className="text-gray-700 font-medium">Entrega especial para <span className="text-[#FF2D55] font-bold">{receiverName}</span></p>
+                                <p className="text-gray-500 font-medium">¡Envíala ahora y espera la magia!</p>
                             </div>
 
                             <div className="bg-white p-3 rounded-2xl flex items-center gap-2 mb-6 border border-pink-50 shadow-inner group">
@@ -417,7 +417,7 @@ export default function CreatorFlow() {
                                     onClick={copyToClipboard}
                                     className="bg-[#FF2D55] text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm"
                                 >
-                                    {isCopied ? "Copied!" : "Copy"}
+                                    {isCopied ? "¡Copiado!" : "Copiar"}
                                 </button>
                             </div>
 
@@ -439,11 +439,11 @@ export default function CreatorFlow() {
                                         className="w-3 h-3 rounded border-gray-300 text-[#FF2D55] focus:ring-[#FF2D55] cursor-pointer accent-[#FF2D55]"
                                     />
                                     <span className="text-gray-400 text-[10px] font-medium tracking-tight">
-                                        {isShared ? "Shared to public gallery" : "Post to public gallery"}
+                                        {isShared ? "Compartido en galería pública" : "Publicar en galería pública"}
                                     </span>
                                 </label>
                                 {saving && !isShared && (
-                                    <div className="text-[10px] text-gray-400 mt-1 animate-pulse italic">Syncing...</div>
+                                    <div className="text-[10px] text-gray-400 mt-1 animate-pulse italic">Sincronizando...</div>
                                 )}
                             </div>
 
@@ -451,7 +451,7 @@ export default function CreatorFlow() {
                                 onClick={() => setShowShareModal(false)}
                                 className="w-full flex items-center justify-center gap-2 bg-white text-gray-600 hover:text-gray-800 font-bold text-xs uppercase tracking-widest py-4 px-8 rounded-2xl transition-all border border-gray-100"
                             >
-                                Back to Home
+                                Volver al Inicio
                             </button>
                         </div>
                     </div>
