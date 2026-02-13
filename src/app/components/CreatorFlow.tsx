@@ -6,14 +6,14 @@ import Navbar from './Navbar';
 import DrawCanvas from './DrawCanvas';
 import Gallery from './Gallery';
 import GameInfoModal from './GameInfoModal';
-import { Stroke, encodeData, ROMANTIC_QUOTES } from '../utils/encode';
+import { Stroke, TextElement, encodeData, ROMANTIC_QUOTES } from '../utils/encode';
 import { saveCardToGallery, logCardCreation, saveSharedCard } from '../lib/supabase';
 import RandomDucks from './RandomDucks';
 import { RefreshCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 // Canvas-based preview component with the same textured stroke as DrawCanvas
-const TexturedPreview = memo(function TexturedPreview({ strokes }: { strokes: Stroke[] }) {
+const TexturedPreview = memo(function TexturedPreview({ strokes, texts = [] }: { strokes: Stroke[], texts?: TextElement[] }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +108,22 @@ const TexturedPreview = memo(function TexturedPreview({ strokes }: { strokes: St
                 drawTexturedStroke(stroke.path[i - 1], stroke.path[i]);
             }
         });
-    }, [strokes]);
+
+        // Draw text elements
+        texts.forEach(textEl => {
+            ctx.save();
+            ctx.fillStyle = '#FF2D55';
+            ctx.font = '16px Arial';
+            ctx.textBaseline = 'top';
+            
+            // Apply same transformation as strokes
+            const transformedX = textEl.x * scale + offsetX;
+            const transformedY = textEl.y * scale + offsetY;
+            
+            ctx.fillText(textEl.text, transformedX, transformedY);
+            ctx.restore();
+        });
+    }, [strokes, texts]);
 
     if (strokes.length === 0) return null;
 
@@ -133,6 +148,7 @@ export default function CreatorFlow() {
     const [receiverName, setReceiverName] = useState('');
 
     const [pendingStrokes, setPendingStrokes] = useState<Stroke[]>([]);
+    const [pendingTexts, setPendingTexts] = useState<TextElement[]>([]);
     const [shareUrl, setShareUrl] = useState('');
 
     // Gallery toggle
@@ -151,8 +167,9 @@ export default function CreatorFlow() {
         }
     }, [showShareModal]);
 
-    const handleDrawingShare = (strokes: Stroke[]) => {
+    const handleDrawingShare = (strokes: Stroke[], texts: TextElement[] = []) => {
         setPendingStrokes(strokes);
+        setPendingTexts(texts);
         setQuoteIndex(Math.floor(Math.random() * ROMANTIC_QUOTES.length));
         setShowDraw(false);
         setShowPreview(true);
@@ -169,7 +186,7 @@ export default function CreatorFlow() {
         await logCardCreation(trimmedSender, trimmedReceiver);
 
         // Try short link via Supabase first
-        const shortResult = await saveSharedCard(trimmedSender, trimmedReceiver, pendingStrokes, quoteIndex);
+        const shortResult = await saveSharedCard(trimmedSender, trimmedReceiver, pendingStrokes, quoteIndex, pendingTexts);
 
         let url: string;
         if (shortResult.success && shortResult.id) {
@@ -181,7 +198,8 @@ export default function CreatorFlow() {
                 s: trimmedSender,
                 r: trimmedReceiver,
                 d: pendingStrokes,
-                q: quoteIndex
+                q: quoteIndex,
+                t: pendingTexts
             };
             const encoded = encodeData(data);
             url = `${window.location.origin}/?data=${encoded}`;
@@ -191,7 +209,7 @@ export default function CreatorFlow() {
 
         // Save to gallery by default
         if (shareToGallery) {
-            const result = await saveCardToGallery(trimmedSender, trimmedReceiver, pendingStrokes);
+            const result = await saveCardToGallery(trimmedSender, trimmedReceiver, pendingStrokes, pendingTexts);
             if (result.success) {
                 setIsShared(true);
             }
@@ -348,7 +366,7 @@ export default function CreatorFlow() {
                                         backgroundSize: '20px 20px'
                                     }}></div>
                                     {/* SVG-based preview with memoized bounds */}
-                                    <TexturedPreview strokes={pendingStrokes} />
+                                    <TexturedPreview strokes={pendingStrokes} texts={pendingTexts} />
                                 </div>
 
                                 <div className="flex flex-col items-center relative z-20">

@@ -5,6 +5,13 @@ export interface Stroke {
     path: Array<{ x: number, y: number }>;
 }
 
+export interface TextElement {
+    id: string;
+    text: string;
+    x: number;
+    y: number;
+}
+
 export const ROMANTIC_QUOTES = [
     "Todas las historias de amor son hermosas, pero la nuestra es mi favorita.",
     "Eres mi sol, mi luna y todas mis estrellas.",
@@ -23,6 +30,7 @@ export interface ShareData {
     r?: string; // receiver name (optional for backward compatibility)
     d: Stroke[]; // drawing data
     q?: number; // quote index
+    t?: TextElement[]; // text elements (optional)
 }
 
 export const encodeData = (data: ShareData): string => {

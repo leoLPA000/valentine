@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { Stroke } from '../utils/encode';
+import { Stroke, TextElement } from '../utils/encode';
 
 // Validate environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -19,6 +19,7 @@ export interface GalleryCard {
     sender: string;
     receiver: string;
     drawing: Stroke[];
+    texts?: TextElement[];
     created_at: string;
 }
 
@@ -29,7 +30,8 @@ export const isGalleryEnabled = (): boolean => isSupabaseConfigured;
 export const saveCardToGallery = async (
     sender: string,
     receiver: string,
-    drawing: Stroke[]
+    drawing: Stroke[],
+    texts?: TextElement[]
 ): Promise<{ success: boolean; error?: string }> => {
     // Skip if not configured
     if (!supabase) {
@@ -40,7 +42,7 @@ export const saveCardToGallery = async (
     try {
         const { error } = await supabase
             .from('cards')
-            .insert([{ sender, receiver, drawing }]);
+            .insert([{ sender, receiver, drawing, texts }]);
 
         if (error) {
             console.error('Failed to save card:', error);
@@ -114,7 +116,8 @@ export const saveSharedCard = async (
     sender: string,
     receiver: string,
     drawing: Stroke[],
-    quoteIndex: number
+    quoteIndex: number,
+    texts?: TextElement[]
 ): Promise<{ success: boolean; id?: string; error?: string }> => {
     if (!supabase) {
         console.warn('Supabase not configured. Cannot create short link.');
@@ -124,7 +127,7 @@ export const saveSharedCard = async (
     try {
         const { data, error } = await supabase
             .from('shared_cards')
-            .insert([{ sender, receiver, drawing, quote_index: quoteIndex }])
+            .insert([{ sender, receiver, drawing, quote_index: quoteIndex, texts }])
             .select('id')
             .single();
 
@@ -146,6 +149,7 @@ export interface SharedCardData {
     receiver: string;
     drawing: Stroke[];
     quote_index: number;
+    texts?: TextElement[];
 }
 
 export const fetchSharedCard = async (id: string): Promise<SharedCardData | null> => {
