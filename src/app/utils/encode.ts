@@ -6,16 +6,16 @@ export interface Stroke {
 }
 
 export const ROMANTIC_QUOTES = [
-    "Every love story is beautiful, but ours is my favorite.",
-    "You are my sun, my moon, and all my stars.",
-    "I love you more than words can wield the matter, Dearer than eye-sight, space, and liberty.",
-    "If I had a flower for every time I thought of you... I could walk through my garden forever.",
-    "You are the finest, loveliest, tenderest, and most beautiful person I have ever known.",
-    "My heart is and always will be yours.",
-    "To the world you may be one person, but to one person you are the world.",
-    "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more.",
-    "You are my heart, my life, my one and only thought.",
-    "I swear I couldn't love you more than I do right now, and yet I know I will tomorrow."
+    "Todas las historias de amor son hermosas, pero la nuestra es mi favorita.",
+    "Eres mi sol, mi luna y todas mis estrellas.",
+    "Te amo más de lo que las palabras pueden expresar, más que la vista, el espacio y la libertad.",
+    "Si tuviera una flor por cada vez que pienso en ti... podría caminar por mi jardín para siempre.",
+    "Eres la persona más maravillosa, encantadora, tierna y hermosa que he conocido.",
+    "Mi corazón es y siempre será tuyo.",
+    "Para el mundo puedes ser una persona, pero para una persona tú eres el mundo.",
+    "Vi que eras perfecto/a, y por eso te amé. Luego vi que no eras perfecto/a y te amé aún más.",
+    "Eres mi corazón, mi vida, mi único pensamiento.",
+    "Juro que no podría amarte más de lo que te amo ahora, pero sé que mañana lo haré."
 ];
 
 export interface ShareData {
