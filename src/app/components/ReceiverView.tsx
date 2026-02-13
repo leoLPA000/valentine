@@ -390,7 +390,7 @@ export default function ReceiverView({ data }: ReceiverViewProps) {
                         {/* Card Content */}
                         <div className="text-center relative z-10 pt-4">
                             <div className="flex flex-col items-center gap-1 mb-4">
-                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold">To my favorite</span>
+                                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FF2D55] font-bold">A mi favoritoe</span>
                                 <h3 className="text-3xl text-gray-800" style={{ fontFamily: '"Chewy", cursive', transform: 'rotate(-2deg)' }}>
                                     {data.r || 'You'}
                                 </h3>
